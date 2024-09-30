@@ -1,10 +1,10 @@
 "use client";
-import { usePathname } from "next/navigation";
+import {usePathname} from "next/navigation";
 import Link from "next/link";
 import Logo from "./Logo";
-import { CgWebsite } from "react-icons/cg";
-import { FaDiscord } from "react-icons/fa";
-import { AiFillTwitterCircle, AiFillYoutube } from "react-icons/ai";
+import {CgWebsite} from "react-icons/cg";
+import {FaDiscord} from "react-icons/fa";
+import {AiFillTwitterCircle, AiFillYoutube} from "react-icons/ai";
 
 interface FooterLink {
   id: number;
@@ -16,10 +16,8 @@ interface FooterLink {
 
 interface CategoryLink {
   id: string;
-  attributes: {
-    name: string;
-    slug: string;
-  };
+  name: string;
+  slug: string;
 }
 
 function FooterLink({ url, text }: FooterLink) {
@@ -38,14 +36,14 @@ function FooterLink({ url, text }: FooterLink) {
   );
 }
 
-function CategoryLink({ attributes }: CategoryLink) {
+function CategoryLink(link: CategoryLink) {
   return (
     <li className="flex">
       <Link
-        href={`/blog/${attributes.slug}`}
+        href={`/blog/${link.slug}`}
         className="hover:dark:text-violet-400"
       >
-        {attributes.name}
+        {link.name}
       </Link>
     </li>
   );

@@ -1,6 +1,6 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
-import { fetchAPI } from "../utils/fetch-api";
+import {useCallback, useEffect, useState} from "react";
+import {fetchAPI} from "../utils/fetch-api";
 
 import Loader from "../components/Loader";
 import Blog from "../views/blog-list";
@@ -22,7 +22,7 @@ export default function Profile() {
   const fetchData = useCallback(async (start: number, limit: number) => {
     setLoading(true);
     try {
-      const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+      const token = process.env.STRAPI_API_TOKEN;
       const path = `/articles`;
       const urlParamsObject = {
         sort: { createdAt: "desc" },

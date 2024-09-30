@@ -1,5 +1,5 @@
 import qs from "qs";
-import { getStrapiURL } from "./api-helpers";
+import {getStrapiURL} from "./api-helpers";
 
 export async function fetchAPI(
   path: string,
@@ -9,7 +9,7 @@ export async function fetchAPI(
   try {
     // Merge default and user options
     const mergedOptions = {
-      next: { revalidate: 60 },
+      next: {revalidate: 60},
       headers: {
         "Content-Type": "application/json",
       },
@@ -23,10 +23,16 @@ export async function fetchAPI(
     )}`;
 
     // Trigger API call
+    console.log("Try to get data from server: ", requestUrl)
     const response = await fetch(requestUrl, mergedOptions);
-    const data = await response.json();
-    return data;
-    
+    const status = response.status;
+    if (200 !== status) {
+      console.error("ERROR to get data from server: ", requestUrl, ", status code: ", status, ", response info: ", await response.text())
+      return {}
+    }
+    const respData = await response.json();
+    console.log("SUCCESS to get data from server: ", requestUrl, ", resp data: ", JSON.stringify(respData, null, 2));
+    return respData;
   } catch (error) {
     console.error(error);
     throw new Error(`Please check if your server is running and you set all the required tokens.`);

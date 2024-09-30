@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import type {Metadata} from "next";
 import "./globals.css";
-import { getStrapiMedia, getStrapiURL } from "./utils/api-helpers";
-import { fetchAPI } from "./utils/fetch-api";
+import {getStrapiMedia, getStrapiURL} from "./utils/api-helpers";
+import {fetchAPI} from "./utils/fetch-api";
 
-import { i18n } from "../../../i18n-config";
+import {i18n} from "../../../i18n-config";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
@@ -11,7 +11,7 @@ import {FALLBACK_SEO} from "@/app/[lang]/utils/constants";
 
 
 async function getGlobal(lang: string): Promise<any> {
-  const token = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
+  const token = process.env.STRAPI_API_TOKEN;
 
   if (!token) throw new Error("The Strapi API Token environment variable is not set.");
 
@@ -20,7 +20,7 @@ async function getGlobal(lang: string): Promise<any> {
 
   const urlParamsObject = {
     populate: [
-      "metadata.shareImage",
+      "metadata",
       "favicon",
       "notificationBanner.link",
       "navbar.links",
@@ -41,8 +41,8 @@ export async function generateMetadata({ params } : { params: {lang: string}}): 
 
   if (!meta.data) return FALLBACK_SEO;
 
-  const { metadata, favicon } = meta.data.attributes;
-  const { url } = favicon.data.attributes;
+  const {metadata, favicon} = meta.data;
+  const {url} = favicon;
 
   return {
     title: metadata.metaTitle,
@@ -63,15 +63,15 @@ export default async function RootLayout({
   const global = await getGlobal(params.lang);
   // TODO: CREATE A CUSTOM ERROR PAGE
   if (!global.data) return null;
-  
-  const { notificationBanner, navbar, footer } = global.data.attributes;
+
+  const {notificationBanner, navbar, footer} = global.data;
 
   const navbarLogoUrl = getStrapiMedia(
-    navbar.navbarLogo.logoImg.data?.attributes.url
+    navbar.navbarLogo.logoImg.data?.url
   );
 
   const footerLogoUrl = getStrapiMedia(
-    footer.footerLogo.logoImg.data?.attributes.url
+    footer.footerLogo.logoImg.data?.url
   );
 
   return (
@@ -93,7 +93,7 @@ export default async function RootLayout({
           logoUrl={footerLogoUrl}
           logoText={footer.footerLogo.logoText}
           menuLinks={footer.menuLinks}
-          categoryLinks={footer.categories.data}
+          categoryLinks={footer.categories}
           legalLinks={footer.legalLinks}
           socialLinks={footer.socialLinks}
         />

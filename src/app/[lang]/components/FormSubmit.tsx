@@ -1,6 +1,6 @@
 "use client";
-import { useState } from "react";
-import { getStrapiURL } from "../utils/api-helpers";
+import {useState} from "react";
+import {getStrapiURL} from "../utils/api-helpers";
 
 export default function FormSubmit({
   placeholder,
@@ -12,7 +12,7 @@ export default function FormSubmit({
   const [email, setEmail] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const token = process.env.NEXT_PUBLIC_STRAPI_FORM_SUBMISSION_TOKEN;
+  const token = process.env.STRAPI_FORM_SUBMISSION_TOKEN;
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
