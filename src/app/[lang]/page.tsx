@@ -13,7 +13,7 @@ export default async function RootRoute({params}: { params: { lang: string } }) 
 
     if (page.data.length == 0 && params.lang !== 'en') return <LangRedirect/>
     if (page.data.length === 0) return null
-    const contentSections = page.data[0].attributes.contentSections
+    const contentSections = page.data[0].contentSections
     return contentSections.map((section: any, index: number) =>
       componentResolver(section, index)
     )
