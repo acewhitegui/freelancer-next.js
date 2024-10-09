@@ -1,3 +1,4 @@
+"use server"
 import qs from "qs";
 import {getStrapiURL} from "./api-helpers";
 
@@ -28,7 +29,7 @@ export async function fetchAPI(
     const status = response.status;
     if (200 !== status) {
       console.error("ERROR to get data from server: ", requestUrl, ", status code: ", status, ", response info: ", await response.text())
-      return {}
+      throw new Error(`ERROR to get server data from: ${requestUrl},status code: ${status}`)
     }
     const respData = await response.json();
     console.log("SUCCESS to get data from server: ", requestUrl, ", resp data: ", JSON.stringify(respData, null, 2));

@@ -1,15 +1,16 @@
 "use client";
 import {useCallback, useEffect, useState} from "react";
-import {fetchAPI} from "../utils/fetch-api";
 
 import Loader from "../components/Loader";
 import Blog from "../views/blog-list";
 import PageHeader from "../components/PageHeader";
+import {listArticles} from "@/app/[lang]/service/article-service";
 
 interface Meta {
   pagination: {
-    start: number;
-    limit: number;
+    page: number;
+    pageSize: number;
+    pageCount: number;
     total: number;
   };
 }
@@ -19,32 +20,15 @@ export default function Profile() {
   const [data, setData] = useState<any>([]);
   const [isLoading, setLoading] = useState(true);
 
-  const fetchData = useCallback(async (start: number, limit: number) => {
+  const fetchData = useCallback(async (page: number, pageSize: number) => {
     setLoading(true);
     try {
-      const token = process.env.STRAPI_API_TOKEN;
-      const path = `/articles`;
-      const urlParamsObject = {
-        sort: { createdAt: "desc" },
-        populate: {
-          cover: { fields: ["url"] },
-          category: { populate: "*" },
-          authorsBio: {
-            populate: "*",
-          },
-        },
-        pagination: {
-          start: start,
-          limit: limit,
-        },
-      };
-      const options = { headers: { Authorization: `Bearer ${token}` } };
-      const responseData = await fetchAPI(path, urlParamsObject, options);
+      const responseData = await listArticles(page, pageSize)
 
-      if (start === 0) {
+      if (page === 0) {
         setData(responseData.data);
       } else {
-        setData((prevData: any[] ) => [...prevData, ...responseData.data]);
+        setData((prevData: any[]) => [...prevData, ...responseData.data]);
       }
 
       setMeta(responseData.meta);
@@ -56,7 +40,7 @@ export default function Profile() {
   }, []);
 
   function loadMorePosts(): void {
-    const nextPosts = meta!.pagination.start + meta!.pagination.limit;
+    const nextPosts = meta!.pagination.page + meta!.pagination.pageSize;
     fetchData(nextPosts, Number(process.env.NEXT_PUBLIC_PAGE_LIMIT));
   }
 
@@ -64,24 +48,24 @@ export default function Profile() {
     fetchData(0, Number(process.env.NEXT_PUBLIC_PAGE_LIMIT));
   }, [fetchData]);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <Loader/>;
 
   return (
     <div>
-      <PageHeader heading="Our Blog" text="Checkout Something Cool" />
+      <PageHeader heading="Our Blog" text="Checkout Something Cool"/>
       <Blog data={data}>
-        {meta!.pagination.start + meta!.pagination.limit <
+        {meta!.pagination.page + meta!.pagination.pageSize <
           meta!.pagination.total && (
-          <div className="flex justify-center">
-            <button
-              type="button"
-              className="px-6 py-3 text-sm rounded-lg hover:underline dark:bg-gray-900 dark:text-gray-400"
-              onClick={loadMorePosts}
-            >
-              Load more posts...
-            </button>
-          </div>
-        )}
+            <div className="flex justify-center">
+              <button
+                type="button"
+                className="px-6 py-3 text-sm rounded-lg hover:underline dark:bg-gray-900 dark:text-gray-400"
+                onClick={loadMorePosts}
+              >
+                Load more posts...
+              </button>
+            </div>
+          )}
       </Blog>
     </div>
   );
