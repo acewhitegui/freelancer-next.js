@@ -12,31 +12,23 @@ interface Article {
   publishedAt: string;
   cover: {
     data: {
-      attributes: {
         url: string;
-      };
     };
   };
   category: {
     data: {
-      attributes: {
         name: string;
         slug: string;
-      };
     };
   };
   authorsBio: {
     data: {
-      attributes: {
         name: string;
         avatar: {
           data: {
-            attributes: {
               url: string;
-            };
           };
         };
-      };
     };
   };
 }
@@ -53,14 +45,14 @@ export default function PostList({
       <div className="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {articles.map((article) => {
           const imageUrl = getStrapiMedia(
-            article.cover.data?.attributes.url
+            article.cover.data?.url
           );
 
-          const category = article.category.data?.attributes;
-          const authorsBio = article.authorsBio.data?.attributes;
+          const category = article.category.data;
+          const authorsBio = article.authorsBio.data;
 
           const avatarUrl = getStrapiMedia(
-            authorsBio?.avatar.data.attributes.url
+            authorsBio?.avatar.data.url
           );
 
           return (

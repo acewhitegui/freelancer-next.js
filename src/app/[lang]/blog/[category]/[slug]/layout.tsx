@@ -5,11 +5,11 @@ import {fetchAPI} from "@/app/[lang]/utils/fetch-api";
 async function fetchSideMenuData(filter: string) {
   try {
     const token = process.env.STRAPI_API_TOKEN;
-    const options = { headers: { Authorization: `Bearer ${token}` } };
+    const options = {headers: {Authorization: `Bearer ${token}`}};
 
     const categoriesResponse = await fetchAPI(
       "/categories",
-      { populate: "*" },
+      {populate: "*"},
       options
     );
 
@@ -17,12 +17,12 @@ async function fetchSideMenuData(filter: string) {
       "/articles",
       filter
         ? {
-            filters: {
-              category: {
-                name: filter,
-              },
+          filters: {
+            category: {
+              name: filter,
             },
-          }
+          },
+        }
         : {},
       options
     );
@@ -38,21 +38,17 @@ async function fetchSideMenuData(filter: string) {
 
 interface Category {
   id: number;
-  attributes: {
-    name: string;
-    slug: string;
-    articles: {
-      data: Array<{}>;
-    };
+  name: string;
+  slug: string;
+  articles: {
+    data: Array<{}>;
   };
 }
 
 interface Article {
   id: number;
-  attributes: {
-    title: string;
-    slug: string;
-  };
+  title: string;
+  slug: string;
 }
 
 interface Data {
@@ -61,17 +57,17 @@ interface Data {
 }
 
 export default async function LayoutRoute({
-  params,
-  children,
-}: {
+                                            params,
+                                            children,
+                                          }: {
   children: React.ReactNode;
   params: {
     slug: string;
     category: string;
   };
 }) {
-  const { category } = params;
-  const { categories, articles } = (await fetchSideMenuData(category)) as Data;
+  const {category} = params;
+  const {categories, articles} = (await fetchSideMenuData(category)) as Data;
 
   return (
     <section className="container p-8 mx-auto space-y-6 sm:space-y-12">
@@ -92,7 +88,7 @@ export default async function LayoutRoute({
 export async function generateStaticParams() {
   const token = process.env.STRAPI_API_TOKEN;
   const path = `/articles`;
-  const options = { headers: { Authorization: `Bearer ${token}` } };
+  const options = {headers: {Authorization: `Bearer ${token}`}};
   const articleResponse = await fetchAPI(
     path,
     {
@@ -103,12 +99,10 @@ export async function generateStaticParams() {
 
   return articleResponse.data.map(
     (article: {
-      attributes: {
+      slug: string;
+      category: {
         slug: string;
-        category: {
-          slug: string;
-        };
       };
-    }) => ({ slug: article.attributes.slug, category: article.attributes.slug })
+    }) => ({slug: article.slug, category: article.slug})
   );
 }
