@@ -11,32 +11,24 @@ interface Article {
   updatedAt: string;
   publishedAt: string;
   cover: {
-    data: {
-        url: string;
-    };
+    url: string;
   };
   category: {
-    data: {
-        name: string;
-        slug: string;
-    };
+    name: string;
+    slug: string;
   };
   authorsBio: {
-    data: {
-        name: string;
-        avatar: {
-          data: {
-              url: string;
-          };
-        };
+    name: string;
+    avatar: {
+      url: string;
     };
   };
 }
 
 export default function PostList({
-  data: articles,
-  children,
-}: {
+                                   data: articles,
+                                   children,
+                                 }: {
   data: Article[];
   children?: React.ReactNode;
 }) {
@@ -45,14 +37,14 @@ export default function PostList({
       <div className="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {articles.map((article) => {
           const imageUrl = getStrapiMedia(
-            article.cover.data?.url
+            article.cover?.url
           );
 
-          const category = article.category.data;
-          const authorsBio = article.authorsBio.data;
+          const category = article.category;
+          const authorsBio = article.authorsBio;
 
           const avatarUrl = getStrapiMedia(
-            authorsBio?.avatar.data.url
+            authorsBio?.avatar.url
           );
 
           return (

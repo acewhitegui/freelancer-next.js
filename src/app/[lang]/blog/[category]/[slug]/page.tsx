@@ -13,14 +13,22 @@ async function getPostBySlug(slug: string) {
       authorsBio: {populate: '*'},
       category: {fields: ['name']},
       blocks: {
-        populate: {
-          '__component': '*',
-          'files': '*',
-          'file': '*',
-          'url': '*',
-          'body': '*',
-          'title': '*',
-          'author': '*',
+        on: {
+          "shared.media": {
+            populate: "*",
+          },
+          "shared.quote": {
+            populate: "*",
+          },
+          "shared.rich-text": {
+            populate: "*",
+          },
+          "shared.slider": {
+            populate: "*"
+          },
+          "shared.video-embed": {
+            populate: "*",
+          },
         }
       },
     },

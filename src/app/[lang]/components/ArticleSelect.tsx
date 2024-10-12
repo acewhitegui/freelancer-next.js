@@ -4,9 +4,7 @@ interface Category {
   id: number;
   name: string;
   slug: string;
-  articles: {
-    data: Array<{}>;
-  };
+  articles: Array<{}>;
 }
 
 interface Article {
@@ -41,7 +39,7 @@ export default function ArticleSelect({
       <div>
         <div className="flex flex-wrap py-6 space-x-2 dark:border-gray-400">
           {categories.map((category: Category) => {
-            if (category.articles.data.length === 0) return null;
+            if (category.articles.length === 0) return null;
             return (
               <Link
                 href={`/blog/${category.slug}`}
