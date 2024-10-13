@@ -22,17 +22,19 @@ interface BottomActionsProps {
 export default function BottomActions({data}: BottomActionsProps) {
   return (
     <section className="bg-primary-800 py-20 text-center">
-      <h2 className="title text-white mb-10">{data.title}</h2>
-      {/* Buttons row */}
-      <div className="container flex flex-row justify-center flex-wrap gap-4">
-        {data.buttons.map((button: Button) => (
-          <ButtonLink
-            button={button}
-            appearance={getButtonAppearance(button.type, "dark")}
-            compact={false}
-            key={button.id}
-          />
-        ))}
+      <div className="container flex flex-col justify-center p-6">
+        <h2 className="title text-white mb-10">{data.title}</h2>
+        {/* Buttons row */}
+        <div className="flex flex-row justify-center flex-wrap gap-4">
+          {data.buttons.map((button: Button) => (
+            <ButtonLink
+              button={button}
+              appearance={getButtonAppearance(button.type, "dark")}
+              compact={false}
+              key={button.id}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )

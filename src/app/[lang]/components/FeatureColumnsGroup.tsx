@@ -29,17 +29,19 @@ interface FeaturesProps {
 
 export default function FeatureColumnsGroup({data}: { data: FeaturesProps }) {
   return (
-    <div className="container flex flex-col lg:flex-row lg:flex-wrap gap-12 align-top py-12">
-      {data.features.map((feature: Feature) => (
-        <div className="flex-1 text-lg" key={feature.id}>
-          <div className="w-10 h-10">
-            <NextImage media={feature.icon}/>
+    <section className="dark:bg-black dark:text-gray-100">
+      <div className="container flex justify-between h-16 mx-auto px-0 sm:px-6">
+        {data.features.map((feature: Feature) => (
+          <div className="flex-1 text-lg" key={feature.id}>
+            <div className="inline-block w-10 h-10">
+              <NextImage media={feature.icon}/>
+            </div>
+            <h3 className="font-bold mt-4 mb-4">{feature.title}</h3>
+            <p>{feature.description}</p>
           </div>
-          <h3 className="font-bold mt-4 mb-4">{feature.title}</h3>
-          <p>{feature.description}</p>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </section>
   )
 }
 
