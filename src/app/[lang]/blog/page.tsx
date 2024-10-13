@@ -1,10 +1,9 @@
 "use client";
 import {useCallback, useEffect, useState} from "react";
-
-import Loader from "../components/Loader";
-import Blog from "../views/blog-list";
-import PageHeader from "../components/PageHeader";
+import Blog from "@/app/[lang]/views/blog-list";
 import {listArticles} from "@/app/[lang]/service/article-service";
+import Loader from "@/app/[lang]/components/elements/Loader";
+import PageHeader from "@/app/[lang]/components/PageHeader";
 
 interface Meta {
   pagination: {

@@ -1,3 +1,6 @@
+/**
+ *  Page is a common object for strapi model page, it main use dynamic field to adjust page layout
+ */
 import {Metadata} from "next";
 import {getPageBySlug} from "@/app/[lang]/utils/get-page-by-slug";
 import {FALLBACK_SEO} from "@/app/[lang]/utils/constants";
