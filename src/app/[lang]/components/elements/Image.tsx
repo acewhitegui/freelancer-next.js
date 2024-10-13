@@ -12,7 +12,7 @@ interface MediaPros {
 export default function NextImage(data: any, props?: MediaPros) {
   const {url, alternativeText, width, height} = data.media
 
-  const loader: ({src, width}: { src: string; width: string }) => null | string = ({src, width}: {
+  const loader: ({src, width}: { src: string; width: string }) => undefined | string = ({src, width}: {
     src: string,
     width: string
   }) => {
