@@ -30,7 +30,7 @@ interface FeaturesProps {
 export default function FeatureColumnsGroup({data}: { data: FeaturesProps }) {
   return (
     <section className="dark:bg-black dark:text-gray-100">
-      <div className="container flex justify-between h-16 mx-auto px-0 sm:px-6">
+      <div className="container flex justify-between h-16 p-6 mx-auto">
         {data.features.map((feature: Feature) => (
           <div className="flex-1 text-lg" key={feature.id}>
             <div className="inline-block w-10 h-10">
