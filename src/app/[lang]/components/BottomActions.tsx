@@ -19,7 +19,7 @@ interface BottomActionsProps {
 }
 
 
-const BottomActions = ({data}: BottomActionsProps) => {
+export default function BottomActions({data}: BottomActionsProps) {
   return (
     <section className="bg-primary-800 py-20 text-center">
       <h2 className="title text-white mb-10">{data.title}</h2>
@@ -29,6 +29,7 @@ const BottomActions = ({data}: BottomActionsProps) => {
           <ButtonLink
             button={button}
             appearance={getButtonAppearance(button.type, "dark")}
+            compact={false}
             key={button.id}
           />
         ))}
@@ -36,5 +37,3 @@ const BottomActions = ({data}: BottomActionsProps) => {
     </section>
   )
 }
-
-export default BottomActions

@@ -48,7 +48,11 @@ const ButtonContent = ({button, appearance, compact}: { button: Button, appearan
   )
 }
 
-const ButtonLink = ({button, appearance, compact}: { button: Button, appearance: string, compact: boolean }) => {
+const ButtonLink = ({button, appearance, compact = false}: {
+  button: Button,
+  appearance: string,
+  compact: boolean
+}) => {
   return (
     // @ts-ignore
     <CustomLink link={button}>
