@@ -1,10 +1,10 @@
 "use client";
 import Logo from "./Logo";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Dialog } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import {usePathname} from "next/navigation";
+import {Dialog} from "@headlessui/react";
+import {Bars3Icon, XMarkIcon} from "@heroicons/react/24/outline";
+import {useState} from "react";
 
 interface NavLink {
   id: number;
@@ -60,7 +60,7 @@ export default function Navbar({
   logoText,
 }: {
   links: Array<NavLink>;
-  logoUrl: string | null;
+  logoUrl: string | null | undefined;
   logoText: string | null;
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

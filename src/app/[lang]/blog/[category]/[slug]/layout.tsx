@@ -36,15 +36,6 @@ async function fetchSideMenuData(filter: string) {
   }
 }
 
-interface Category {
-  id: number;
-  name: string;
-  slug: string;
-  articles: {
-    data: Array<{}>;
-  };
-}
-
 interface Article {
   id: number;
   title: string;

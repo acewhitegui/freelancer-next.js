@@ -2,14 +2,7 @@ import Link from "next/link"
 import PropTypes from "prop-types"
 import {linkPropTypes} from "@/app/[lang]/utils/types";
 
-interface Link {
-  id: number;
-  url: string;
-  newTab: boolean;
-  text: string;
-}
-
-const CustomLink = ({link, children}: { link: Link, children: any }) => {
+const CustomLink = ({link, children}: { link: StrapiLink, children: any }) => {
   const isInternalLink = link.url.startsWith("/")
 
   // For internal links, use the Next.js Link component

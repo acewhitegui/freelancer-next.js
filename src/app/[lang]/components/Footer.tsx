@@ -72,7 +72,7 @@ export default function Footer({
   legalLinks,
   socialLinks,
 }: {
-  logoUrl: string | null;
+  logoUrl: string | null | undefined;
   logoText: string | null;
   menuLinks: Array<FooterLink>;
   categoryLinks: Array<CategoryLink>;

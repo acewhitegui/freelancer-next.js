@@ -1,12 +1,5 @@
 import Link from "next/link";
 
-interface Category {
-  id: number;
-  name: string;
-  slug: string;
-  articles: Array<{}>;
-}
-
 interface Article {
   id: number;
   title: string;
