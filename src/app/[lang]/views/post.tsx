@@ -1,5 +1,5 @@
 import {formatDate, getStrapiMedia} from '@/app/[lang]/utils/api-helpers';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import componentResolver from '../utils/component-resolver';
 
 interface Article {
