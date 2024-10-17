@@ -4,7 +4,7 @@
 import {Metadata} from "next";
 import {getPageBySlug} from "@/app/[lang]/utils/get-page-by-slug";
 import {FALLBACK_SEO} from "@/app/[lang]/utils/constants";
-import componentResolver from "../utils/component-resolver";
+import componentResolver from "@/app/[lang]/utils/component-resolver";
 
 
 type Props = {

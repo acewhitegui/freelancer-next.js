@@ -1,5 +1,5 @@
-import ButtonLink from "./elements/ButtonLink";
-import {getButtonAppearance} from "../utils/button";
+import ButtonLink from "@/app/[lang]/components/elements/ButtonLink";
+import {getButtonAppearance} from "@/app/[lang]/utils/button";
 
 interface Button {
   id: string;
