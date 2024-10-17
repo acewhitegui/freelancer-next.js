@@ -1,16 +1,14 @@
 import Image from "next/legacy/image";
-import {getStrapiMedia} from "../utils/api-helpers";
+import {getStrapiMedia} from "@/app/[lang]/utils/api-helpers";
 
 interface Testimonial {
   text: string;
   authorName: string;
   picture: {
-    data: {
-      id: string;
-        name: string;
-        alternativeText: string;
-        url: string;
-    };
+    id: string;
+    name: string;
+    alternativeText: string;
+    url: string;
   };
 }
 
@@ -20,18 +18,18 @@ interface TestimonialsProps {
     title: string;
     description: string;
     testimonials: Testimonial[];
-  };
+  }
 }
 
-function Testimonial({ text, authorName, picture }: Readonly<Testimonial>) {
-  const imageUrl = getStrapiMedia(picture.data?.url);
+function Testimonial({text, authorName, picture}: Readonly<Testimonial>) {
+  const imageUrl = getStrapiMedia(picture.url);
   return (
     <div className="flex flex-col items-center mx-12 lg:mx-0">
       <div className="flex items-center">
         <div className="my-6">
           <Image
             src={imageUrl ?? ""}
-            alt={picture.data?.alternativeText || "none provided"}
+            alt={picture.alternativeText || "none provided"}
             className="inline-block h-32 w-32 rounded-full"
             width={200}
             height={200}
@@ -65,7 +63,7 @@ function Testimonial({ text, authorName, picture }: Readonly<Testimonial>) {
   );
 }
 
-export default function Testimonials({ data }: TestimonialsProps) {
+export default function Testimonials({data}: TestimonialsProps) {
   return (
     <section className="dark:bg-black dark:text-gray-100  m:py-12 lg:py-24">
       <div className="container mx-auto py-4 space-y-2 text-center">
